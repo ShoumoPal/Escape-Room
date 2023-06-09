@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class BackgroundMover : MonoBehaviour
 {
-    private SpriteRenderer backgroundSprite;
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float moveAmount;
-    private float position;
+    private float length;
+    private float startPosition;
+    [SerializeField] private GameObject cam;
+    [SerializeField] private float parallax;
 
     private void Start()
     {
-        backgroundSprite = GetComponent<SpriteRenderer>();
+        startPosition = transform.position.x;
+        length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
     private void Update()
     {
-        position += speed;
-        if(position > moveAmount)
+        float temp = cam.transform.position.x * (1 - parallax);
+        float distance = cam.transform.position.x * parallax;
+
+        transform.position = new Vector3 (startPosition + distance, transform.position.y, transform.position.z);
+
+        if(temp > startPosition + length)
         {
-            position -= moveAmount;
+            startPosition += length;
         }
-        transform.position = new Vector3(position, transform.position.y, transform.position.z);
+        else if(temp < startPosition - length)
+        {
+            startPosition -= length;
+        }
     }
 }

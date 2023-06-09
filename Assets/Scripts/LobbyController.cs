@@ -20,4 +20,13 @@ public class LobbyController : MonoBehaviour
     {
         levelSelectionMenu.SetActive(true);
     }
+
+    public void PlayButtonHoverSound()
+    {
+        SoundManager.Instance.PlaySFX(SoundTypes.ButtonHover);
+    }
+    public void PlayButtonClickSound()
+    {
+        SoundManager.Instance.PlaySFX(SoundTypes.ButtonPress);
+    }
 }
