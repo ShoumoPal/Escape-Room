@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
@@ -18,6 +19,10 @@ public class PlayerController : MonoBehaviour
     private LayerMask whatIsGround;
     [SerializeField]
     private LayerMask platformMask;
+    [SerializeField]
+    private RectTransform detectionBar;
+    [SerializeField]
+    private Animator detectionBarAnim;
 
     private Animator playerAnim;
     private SpriteRenderer playerSprite;
@@ -29,9 +34,18 @@ public class PlayerController : MonoBehaviour
     private float vertical;
 
     private bool playerFacingRight = true;
+
     [SerializeField]
     private bool jump = false;
     private int currentJumps;
+
+    //For detection bar
+    private float _fullwidth;
+    [SerializeField]
+    private float Value;
+    [SerializeField] 
+    private float MaxValue;
+    private bool isSafe = true;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +55,7 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         numberOfJumps = 2;
         isGrounded = true;
+        _fullwidth = detectionBar.rect.width;
     }
 
     // Update is called once per frame
@@ -54,7 +69,19 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
             currentJumps++;
+            SoundManager.Instance.PlaySFX(SoundTypes.JumpSound);
             playerAnim.SetBool("isJumping", true);
+        }
+
+        //For detecttion Bar
+        if(isSafe)
+        {
+            detectionBarAnim.SetBool("Fade", true);
+            detectionBarAnim.SetBool("Show", false);
+        }
+        else
+        {
+            detectionBarAnim.SetBool("Show", true);
         }
 
     }
@@ -77,7 +104,14 @@ public class PlayerController : MonoBehaviour
     public void PlayerMovement(float _horizontal)
     {
         bool wasGrounded = isGrounded;
-
+        if(horizontal != 0f && wasGrounded)
+        {
+            SoundManager.Instance.PlayFootsteps();
+        }
+        else
+        {
+            SoundManager.Instance.StopFootsteps();
+        }
         Vector3 targetVelocity = new Vector2(speed * horizontal * Time.fixedDeltaTime * 10f, playerRb.velocity.y);
         playerRb.velocity = Vector3.SmoothDamp(playerRb.velocity, targetVelocity, ref velocity, 0.05f);
 
@@ -106,12 +140,11 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement(horizontal);
     }
-
     //For detecting collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        bool isSafe = false;
-        Debug.DrawLine(gameObject.transform.position, collision.transform.position);
+        isSafe = false;
+        //Debug.DrawLine(gameObject.transform.position, collision.transform.position);
         Light2D directionalLight = collision.GetComponent<Light2D>();
         if(directionalLight != null)
         {
@@ -123,12 +156,31 @@ public class PlayerController : MonoBehaviour
             }
             if(isSafe)
             {
+                //detectionBarAnim.SetBool("Fade", true);
+                //detectionBarAnim.SetBool("Show", false);
                 Debug.Log("Player safe!");
             }
             else
             {
+
+                //detectionBarAnim.SetBool("Show", true);
+                SoundManager.Instance.PlaySFX(SoundTypes.HurtSound);
+                ChangeValue(-20);
+                float targetValue = Value * _fullwidth / MaxValue;
+                detectionBar.sizeDelta = new Vector2(targetValue, detectionBar.rect.height);
                 Debug.Log("Player dead...");
             }
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Light2D>() != null)
+        {
+            isSafe = true;
+        }
+    }
+    private void ChangeValue(float amount)
+    {
+        Value = Mathf.Clamp(Value + amount, 0, MaxValue);
     }
 }

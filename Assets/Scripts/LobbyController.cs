@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,10 +11,18 @@ public class LobbyController : MonoBehaviour
     private Button quitButton;
     [SerializeField]
     private GameObject levelSelectionMenu;
+    [SerializeField]
+    private Button backButton;
 
     private void Awake()
     {
         playButton.onClick.AddListener(ShowLevelSelection);
+        backButton.onClick.AddListener(BackToLobby);
+    }
+
+    private void BackToLobby()
+    {
+        levelSelectionMenu.SetActive(false);
     }
 
     public void ShowLevelSelection()
