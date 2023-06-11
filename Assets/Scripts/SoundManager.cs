@@ -8,7 +8,10 @@ public enum SoundTypes
 {
     BackgroundMusic,
     ButtonHover,
-    ButtonPress
+    ButtonPress,
+    JumpSound,
+    LevelCompleteSound,
+    HurtSound
 }
 
 public class SoundManager : MonoBehaviour
@@ -17,6 +20,8 @@ public class SoundManager : MonoBehaviour
     private AudioSource soundsFX;
     [SerializeField]
     private AudioSource soundsBG;
+    [SerializeField]
+    private AudioSource soundsFootsteps;
 
     public Sounds[] sounds;
 
@@ -50,7 +55,21 @@ public class SoundManager : MonoBehaviour
         float Volume = Array.Find(sounds, i => i.soundType == soundType).volume;
         soundsBG.clip = clip;
         soundsBG.volume = Volume;
-        soundsBG.Play();
+        if (!soundsFX.isPlaying)
+        {
+            soundsBG.Play();
+        }
+    }
+    public void PlayFootsteps()
+    {
+        if(!soundsFootsteps.isPlaying)
+        {
+            soundsFootsteps.Play();
+        }
+    }
+    public void StopFootsteps()
+    {
+        soundsFootsteps.Stop();
     }
 }
 //class for Sounds
