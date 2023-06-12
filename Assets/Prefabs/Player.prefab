@@ -68,7 +68,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -27.506, y: -541.7614}
-  m_SizeDelta: {x: 1, y: 0.07}
+  m_SizeDelta: {x: 1, y: 0.1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8130319877944252902
 CanvasRenderer:
@@ -265,6 +265,7 @@ MonoBehaviour:
     m_Bits: 256
   detectionBar: {fileID: 8130319877944252920}
   detectionBarAnim: {fileID: 8130319877510861369}
+  gameOverPanel: {fileID: 0}
   jump: 0
   Value: 100
   MaxValue: 100
@@ -331,7 +332,7 @@ MonoBehaviour:
   - {x: 0.26148748, y: -0.44940662, z: 0}
   m_ShapePathHash: -670454907
   m_Mesh: {fileID: 0}
-  m_InstanceId: -131948
+  m_InstanceId: -126244
   m_LocalBounds:
     m_Center: {x: -0.025296688, y: -0.007227719, z: 0}
     m_Extent: {x: 0.28678417, y: 0.4421789, z: 0}

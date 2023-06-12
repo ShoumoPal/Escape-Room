@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public Levels[] levels;
     private static LevelManager instance;
     public static LevelManager Instance { get { return instance; } }
+    private bool gameWin = false;
 
     private void Awake()
     {
@@ -48,7 +49,10 @@ public class LevelManager : MonoBehaviour
             SetLevelStatus(levels[i].levelName, LevelStatus.Locked);
         }
     }
-
+    public bool PlayerHasWon()
+    {
+        return gameWin;
+    }
     public LevelStatus GetLevelStatus(string levelName)
     {
         LevelStatus levelStatus = (LevelStatus) PlayerPrefs.GetInt(levelName);
@@ -70,7 +74,15 @@ public class LevelManager : MonoBehaviour
     {
         SetLevelStatus(SceneManager.GetActiveScene().name, LevelStatus.Completed);
 
-        string nextSceneName = NameFromIndex(SceneManager.GetActiveScene().buildIndex + 1);
-        SetLevelStatus(nextSceneName, LevelStatus.Unlocked);
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if(nextSceneIndex > levels.Length)
+        {
+            gameWin = true;
+        }
+        else
+        {
+            string nextSceneName = NameFromIndex(nextSceneIndex);
+            SetLevelStatus(nextSceneName, LevelStatus.Unlocked);
+        }
     }
 }

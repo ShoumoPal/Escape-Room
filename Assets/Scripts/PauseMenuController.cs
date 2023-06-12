@@ -15,6 +15,10 @@ public class PauseMenuController : MonoBehaviour
         homeButton.onClick.AddListener(BackToLobby);
     }
 
+    private void OnEnable()
+    {
+        Time.timeScale = 0f;
+    }
     private void BackToLobby()
     {
         Time.timeScale = 1f;
