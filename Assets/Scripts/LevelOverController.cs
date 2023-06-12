@@ -9,6 +9,8 @@ public class LevelOverController : MonoBehaviour
     private Animator crossfadeAnim;
     [SerializeField]
     private Animator glowAnim;
+    [SerializeField]
+    private GameObject gameWinPanel;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,10 +18,19 @@ public class LevelOverController : MonoBehaviour
         {
             //Level complete
             LevelManager.Instance.SetCurrentLevelComplete();
-            SoundManager.Instance.PlaySFX(SoundTypes.LevelCompleteSound);
-            glowAnim.SetTrigger("Glow");
-            StartCoroutine(LoadNextLevel());
-
+            if (LevelManager.Instance.PlayerHasWon())
+            {
+                gameWinPanel.SetActive(true);
+                SoundManager.Instance.StopFootsteps();
+                SoundManager.Instance.PlaySFX(SoundTypes.LevelCompleteSound);
+                glowAnim.SetTrigger("Glow");
+            }
+            else
+            {
+                SoundManager.Instance.PlaySFX(SoundTypes.LevelCompleteSound);
+                glowAnim.SetTrigger("Glow");
+                StartCoroutine(LoadNextLevel());
+            }
         }
     }
     IEnumerator LoadNextLevel()

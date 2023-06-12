@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private RectTransform detectionBar;
     [SerializeField]
     private Animator detectionBarAnim;
+    [SerializeField]
+    private GameObject gameOverPanel;
 
     private Animator playerAnim;
     private SpriteRenderer playerSprite;
@@ -81,6 +83,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if(Value <= 0f)
+            {
+                gameOverPanel.SetActive(true);
+            }
             detectionBarAnim.SetBool("Show", true);
         }
 
