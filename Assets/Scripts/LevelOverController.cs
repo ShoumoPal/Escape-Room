@@ -21,7 +21,6 @@ public class LevelOverController : MonoBehaviour
             if (LevelManager.Instance.PlayerHasWon())
             {
                 gameWinPanel.SetActive(true);
-                SoundManager.Instance.StopFootsteps();
                 SoundManager.Instance.PlaySFX(SoundTypes.LevelCompleteSound);
                 glowAnim.SetTrigger("Glow");
             }
