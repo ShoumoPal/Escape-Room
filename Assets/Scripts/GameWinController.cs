@@ -15,6 +15,7 @@ public class GameWinController : MonoBehaviour
     }
     private void OnEnable()
     {
+        SoundManager.Instance.StopFootsteps();
         Time.timeScale = 0f;
     }
     private void BackToHome()
