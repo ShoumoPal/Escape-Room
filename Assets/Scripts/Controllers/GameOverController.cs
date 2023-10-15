@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverController : MonoBehaviour
@@ -24,12 +20,12 @@ public class GameOverController : MonoBehaviour
     private void BackToHome()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        LevelManager.Instance.Lobby();
     }
 
     private void RestartLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LevelManager.Instance.RestartLevel();
     }
 }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameWinController : MonoBehaviour
@@ -21,6 +17,6 @@ public class GameWinController : MonoBehaviour
     private void BackToHome()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        LevelManager.Instance.Lobby();
     }
 }

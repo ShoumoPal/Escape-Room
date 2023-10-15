@@ -62,6 +62,17 @@ public class LevelManager : GenericMonoSingleton<LevelManager>
         int dot = name.LastIndexOf('.');
         return name.Substring(0, dot);
     }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Lobby()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void SetCurrentLevelComplete()
     {
         SetLevelStatus(SceneManager.GetActiveScene().name, LevelStatus.Completed);

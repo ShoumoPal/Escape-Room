@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
@@ -23,7 +19,7 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 1f;
         SoundManager.Instance.PlaySFX(SoundTypes.ButtonPress);
-        SceneManager.LoadScene(0);
+        LevelManager.Instance.Lobby();
     }
 
     private void ResumeGame()

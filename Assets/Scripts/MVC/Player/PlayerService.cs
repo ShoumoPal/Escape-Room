@@ -1,4 +1,4 @@
-using System;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerService : GenericLazySingleton<PlayerService>
@@ -8,6 +8,7 @@ public class PlayerService : GenericLazySingleton<PlayerService>
 
     [SerializeField] private PlayerScriptableObject _playerSO;
     [SerializeField] private PlayerView _playerPrefab;
+    [SerializeField] private CinemachineVirtualCamera _playerVirtualCamera;
 
     private void Start()
     {
@@ -18,6 +19,12 @@ public class PlayerService : GenericLazySingleton<PlayerService>
     {
         PlayerModel model = new PlayerModel(_playerSO);
         PlayerView view = Instantiate<PlayerView>(_playerPrefab, location, Quaternion.identity);
-        
+        //making the camera follow the player
+        _playerVirtualCamera.Follow = view.gameObject.transform;
+        Player = new PlayerController(model, view);
+
+        //Linking rest of the MVC
+        model.SetPlayerController(Player);
+        view.SetPlayerController(Player);
     }
 }
