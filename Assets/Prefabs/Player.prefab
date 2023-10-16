@@ -140,10 +140,10 @@ GameObject:
   - component: {fileID: 8130319878766676679}
   - component: {fileID: 8130319878766676696}
   - component: {fileID: 8130319878766676697}
-  - component: {fileID: 8130319878766676678}
   - component: {fileID: 8130319878766676676}
   - component: {fileID: 8130319878766676675}
   - component: {fileID: 8130319878766676674}
+  - component: {fileID: 4341910017362055260}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -241,34 +241,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8130319878766676678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8130319878766676698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c04d00db21f5dc54f9f719b727f28b58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 75
-  jumpForce: 1000
-  numberOfJumps: 0
-  groundCheck: {fileID: 8130319877815383153}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 320
-  platformMask:
-    serializedVersion: 2
-    m_Bits: 256
-  detectionBar: {fileID: 8130319877944252920}
-  detectionBarAnim: {fileID: 8130319877510861369}
-  gameOverPanel: {fileID: 0}
-  jump: 0
-  Value: 100
-  MaxValue: 100
 --- !u!50 &8130319878766676676
 Rigidbody2D:
   serializedVersion: 4
@@ -332,10 +304,31 @@ MonoBehaviour:
   - {x: 0.26148748, y: -0.44940662, z: 0}
   m_ShapePathHash: -670454907
   m_Mesh: {fileID: 0}
-  m_InstanceId: -126244
+  m_InstanceId: 32948
   m_LocalBounds:
     m_Center: {x: -0.025296688, y: -0.007227719, z: 0}
     m_Extent: {x: 0.28678417, y: 0.4421789, z: 0}
+--- !u!114 &4341910017362055260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8130319878766676698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac736d6e319477940a1f174ee12a8be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxValue: 100
+  Value: 100
+  _playerAnim: {fileID: 8130319878766676697}
+  _playerSprite: {fileID: 8130319878766676696}
+  _groundCheck: {fileID: 8130319877815383153}
+  _detectionBarAnim: {fileID: 8130319877510861369}
+  _gameOverPanel: {fileID: 0}
+  _playerRb: {fileID: 8130319878766676676}
+  _detectionBar: {fileID: 8130319877944252920}
 --- !u!1 &8130319878768005374
 GameObject:
   m_ObjectHideFlags: 0
