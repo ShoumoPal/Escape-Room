@@ -13,6 +13,7 @@ public class PlayerController
         PlayerView = playerView;
     }
 
+    // Player animation logic
     public void PlayerAnimation(float horizontal, float vertical, SpriteRenderer _playerSprite, Animator _playerAnim)
     {
         bool _playerFacingRight = horizontal > 0f;
