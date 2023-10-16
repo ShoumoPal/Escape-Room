@@ -16,3 +16,7 @@
 
 
 ![Untitled video - Made with Clipchamp (2)](https://github.com/ShoumoPal/Escape-Room/assets/46050414/35ebe230-31aa-4342-95c1-70b830bd218e)
+
+* Design Patterns including MVC and Singletons
+
+* Scriptable Objects to store data
